@@ -1,0 +1,30 @@
+{
+  "index_patterns": ["ocr_product_keyword*"],
+  "settings": {
+    "number_of_shards": 1
+  },
+  "mappings": {
+    "properties": {
+      "SUB_SEQ_NO": { "type": "integer" },
+      "SEQ_NO": { "type": "integer" },
+      "SUB_TITLE": {
+        "type": "text",
+        "analyzer": "standard"
+      },
+      "SUB_BRAND": {
+        "type": "text",
+        "analyzer": "standard"
+      },
+      "SEARCH_KEYWORD": {
+        "type": "text",
+        "analyzer": "standard"
+      },
+      "SEARCH_BRAND": {
+        "type": "text",
+        "analyzer": "standard"
+      },
+      "REG_DATE": { "type": "date" },
+      "UPD_DATE": { "type": "date" }
+    }
+  }
+}

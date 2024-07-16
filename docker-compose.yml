@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3'
 services:
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.14.0
@@ -21,12 +21,13 @@ services:
       - elk
 
   logstash:
-    image: docker.elastic.co/logstash/logstash:7.14.0
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: logstash
-    volumes:
-      - ./logstash/pipeline:/usr/share/logstash/pipeline
     ports:
       - 5044:5044
+      - 9600:9600
     depends_on:
       - elasticsearch
     networks:
@@ -44,25 +45,8 @@ services:
     networks:
       - elk
 
-  mariadb:
-    image: mariadb:latest
-    container_name: mariadb
-    environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=mydatabase
-      - MYSQL_USER=myuser
-      - MYSQL_PASSWORD=mypassword
-    volumes:
-      - mariadb_data:/var/lib/mysql
-    ports:
-      - 3306:3306
-    networks:
-      - elk
-
 volumes:
   esdata:
-    driver: local
-  mariadb_data:
     driver: local
 
 networks:

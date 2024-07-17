@@ -1,30 +1,55 @@
 {
   "index_patterns": ["ocr_product_keyword*"],
   "settings": {
-    "number_of_shards": 1
+    "index": {
+      // elasticsearch에서 기본 제공하는 설정, 색인에 대한 분석 구성을 정의한다.
+      "analysis": {
+        // 색인에 대한 토크나이저를 구성한다.
+        "tokenizer": {
+          "my_nori_tokenizer": {
+            "type": "nori_tokenizer",
+            "decompound_mode": "mixed", // 'mixed' 복합 명사를 분해하는 기능을 수행
+            "discard_punctuation": "false" // 문장 부호 제거하지 않도록 설정한다. (기본적으로 제거한다.)
+          }
+        },
+        // analyzer는 분할된 토큰에 필터링과 정규화 처리 통헤 섹인에 추가할 단어의 집합을 만드는 데 사용된다.
+        "analyzer": {
+          // analyzer를 여러 개 만들어서 사용 가능하다.
+          "my_nori_analyzer": {
+            "type": "custom",
+            "tokenizer": "my_nori_tokenizer",
+            // lowercase: 알파벳 소문자로 통일 시킨다.
+            // stop: 문서에서 자주 사용되는 불용어를 제거한다.(검색 품질 향상: "the", "a", "an", "and" 와 같은 단어 검색에서 제외)
+            "filter": ["lowercase", "stop"],
+            // html_strip: HTML 태그 제거
+            "char_filter": ["html_strip"]
+          }
+        }
+      }
+    }
   },
   "mappings": {
     "properties": {
-      "SUB_SEQ_NO": { "type": "integer" },
-      "SEQ_NO": { "type": "integer" },
-      "SUB_TITLE": {
+      "sub_seq_no": { "type": "integer" },
+      "seq_no": { "type": "integer" },
+      "sub_title": {
         "type": "text",
-        "analyzer": "standard"
+        "analyzer": "my_nori_analyzer"
       },
-      "SUB_BRAND": {
+      "sub_brand": {
         "type": "text",
-        "analyzer": "standard"
+        "analyzer": "my_nori_analyzer"
       },
-      "SEARCH_KEYWORD": {
+      "search_keyword": {
         "type": "text",
-        "analyzer": "standard"
+        "analyzer": "my_nori_analyzer"
       },
-      "SEARCH_BRAND": {
+      "search_brand": {
         "type": "text",
-        "analyzer": "standard"
+        "analyzer": "my_nori_analyzer"
       },
-      "REG_DATE": { "type": "date" },
-      "UPD_DATE": { "type": "date" }
+      "reg_date": { "type": "date" },
+      "upd_date": { "type": "date" }
     }
   }
 }

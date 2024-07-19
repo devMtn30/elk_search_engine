@@ -1,0 +1,14 @@
+# Elasticsearch Dockerfile
+FROM docker.elastic.co/elasticsearch/elasticsearch:7.17.4
+
+# Add the custom init script and template
+COPY init-elasticsearch.sh /usr/share/elasticsearch/config/init-elasticsearch.sh
+COPY ocr_product_keyword_template.json /usr/share/elasticsearch/config/ocr_product_keyword_template.json
+
+# Make the script executable
+RUN chmod +x /usr/share/elasticsearch/config/init-elasticsearch.sh
+
+# Install the analysis-nori plugin
+RUN elasticsearch-plugin install analysis-nori
+
+USER elasticsearch

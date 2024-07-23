@@ -1,0 +1,449 @@
+{
+	"info": {
+		"_postman_id": "85ce6577-f3f7-4f4a-b83e-cfbedd99c954",
+		"name": "엘라스틱서치-검색엔진",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "35103209"
+	},
+	"item": [
+		{
+			"name": "index 조회하기",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9200/_cat/indices?v",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"_cat",
+						"indices"
+					],
+					"query": [
+						{
+							"key": "v",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "index 매핑 조회하기",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9200/ocr_product_keyword/_mapping",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"ocr_product_keyword",
+						"_mapping"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "index 세팅 조회하기",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9200/ocr_product_keyword/_settings",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"ocr_product_keyword",
+						"_settings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "index의 데이터 조회하기",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9200/ocr_product_keyword/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"ocr_product_keyword",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "노리_데이터 전체 조회하기",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"query\": {\r\n    \"match_all\": {}\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/ocr_product_keyword/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"ocr_product_keyword",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "노리_데이터 조회하기",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"query\": {\r\n    \"bool\": {\r\n      \"should\": [\r\n        {\r\n          \"bool\": {\r\n            \"should\": [\r\n              {\r\n                \"match_phrase\": {\r\n                  \"search_keyword\": {\r\n                    \"query\": \"레드킹윙+뿌링감자+꿀호떡+콜라125\",\r\n                    \"slop\": 1\r\n                  }\r\n                }\r\n              }\r\n            ]\r\n          }\r\n        },\r\n        {\r\n          \"bool\": {\r\n            \"should\": [\r\n              {\r\n                \"match\": {\r\n                  \"search_brand\": {\r\n                    \"query\": \"BHC\"\r\n                  }\r\n                }\r\n              }\r\n            ]\r\n          }\r\n        }\r\n      ]\r\n    }\r\n  }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/ocr_product_keyword/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"ocr_product_keyword",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "노리_데이터 조회하기_ocr_product_keyword_nori",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"query\": {\r\n    \"bool\": {\r\n      \"should\": [\r\n        {\r\n          \"match\": {\r\n            \"search_keyword\": {\r\n              \"query\": \"아이스돌체라떼T\"\r\n            }\r\n          }\r\n        },\r\n        {\r\n          \"match\": {\r\n            \"search_brand\": {\r\n              \"query\": \"스타벅스\"\r\n            }\r\n          }\r\n        }\r\n      ]\r\n    }\r\n  }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/ocr_product_keyword_nori/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"ocr_product_keyword_nori",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "데이터 삽입_노리테스트",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\" : \"조직 핵심습관\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/nori_sample/_doc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"nori_sample",
+						"_doc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "노리_토큰분석테스트",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"tokenizer\": {\r\n    \"type\": \"nori_tokenizer\",\r\n    \"decompound_mode\": \"mixed\",\r\n    \"discard_punctuation\": \"false\"\r\n  },\r\n  \"filter\": [\"lowercase\", \"stop\"],\r\n  \"text\": [\"조직 핵심습관\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/nori_sample/_analyze",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"nori_sample",
+						"_analyze"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "노리_토큰분석테스트_ocr_product_keyword_nori",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"analyzer\": \"nori_discard\",\r\n  \"text\": \"미스터트리오L+오븐스파게티+콜라125L\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/ocr_product_keyword_nori/_analyze",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"ocr_product_keyword_nori",
+						"_analyze"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "노리_테스트_삭제",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9200/ocr_product_keyword",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"ocr_product_keyword"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "노리_인덱스_생성",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"settings\": {\r\n    \"analysis\": {\r\n      \"analyzer\": {\r\n        \"nori_discard\": {\r\n          \"tokenizer\": \"nori_t_discard\",\r\n          \"filter\": \"my_shingle\"\r\n        }\r\n      },\r\n      \"tokenizer\": {\r\n        \"nori_t_discard\": {\r\n          \"type\": \"nori_tokenizer\",\r\n          \"decompound_mode\": \"discard\"\r\n        }\r\n      },\r\n      \"filter\": {\r\n        \"my_shingle\": {\r\n          \"type\": \"shingle\",\r\n          \"token_separator\": \"\",\r\n          \"max_shingle_size\": 3\r\n        }\r\n      }\r\n    }\r\n  },\r\n  \"mappings\": {\r\n    \"properties\": {\r\n      \"sub_seq_no\": { \"type\": \"integer\" },\r\n      \"seq_no\": { \"type\": \"integer\" },\r\n      \"sub_title\": {\r\n        \"type\": \"text\",\r\n        \"analyzer\": \"nori_discard\"\r\n      },\r\n      \"sub_brand\": {\r\n        \"type\": \"text\",\r\n        \"analyzer\": \"nori_discard\"\r\n      },\r\n      \"search_keyword\": {\r\n        \"type\": \"text\",\r\n        \"analyzer\": \"nori_discard\"\r\n      },\r\n      \"search_brand\": {\r\n        \"type\": \"text\",\r\n        \"analyzer\": \"nori_discard\"\r\n      },\r\n      \"reg_date\": { \"type\": \"date\" },\r\n      \"upd_date\": { \"type\": \"date\" }\r\n    }\r\n  }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/ocr_product_keyword_nori",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"ocr_product_keyword_nori"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "노리_인덱스_생성 2",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"settings\": {\r\n    \"analysis\": {\r\n      \"analyzer\": {\r\n        \"nori_discard\": {\r\n          \"tokenizer\": \"nori_t_discard\",\r\n          \"filter\": \"my_shingle\"\r\n        }\r\n      },\r\n      \"tokenizer\": {\r\n        \"nori_t_discard\": {\r\n          \"type\": \"nori_tokenizer\",\r\n          \"decompound_mode\": \"discard\"\r\n        }\r\n      },\r\n      \"filter\": {\r\n        \"my_shingle\": {\r\n          \"type\": \"shingle\",\r\n          \"token_separator\": \"\",\r\n          \"max_shingle_size\": 9\r\n        }\r\n      }\r\n    }\r\n  },\r\n  \"mappings\": {\r\n    \"properties\": {\r\n      \"sub_seq_no\": { \"type\": \"integer\" },\r\n      \"seq_no\": { \"type\": \"integer\" },\r\n      \"sub_title\": {\r\n        \"type\": \"text\",\r\n        \"analyzer\": \"nori_discard\"\r\n      },\r\n      \"sub_brand\": {\r\n        \"type\": \"text\",\r\n        \"analyzer\": \"nori_discard\"\r\n      },\r\n      \"search_keyword\": {\r\n        \"type\": \"text\",\r\n        \"analyzer\": \"nori_discard\"\r\n      },\r\n      \"search_brand\": {\r\n        \"type\": \"text\",\r\n        \"analyzer\": \"nori_discard\"\r\n      },\r\n      \"reg_date\": { \"type\": \"date\" },\r\n      \"upd_date\": { \"type\": \"date\" }\r\n    }\r\n  }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/ocr_product_keyword_nori2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"ocr_product_keyword_nori2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ngram_인덱스_생성",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"settings\": {\r\n    \"index\": {\r\n      \"max_ngram_diff\": 3,  // ngram 차이를 설정\r\n      \"analysis\": {\r\n        \"tokenizer\": {\r\n          \"my_ngram_tokenizer\": {\r\n            \"type\": \"ngram\",\r\n            \"min_gram\": 2,\r\n            \"max_gram\": 5,\r\n            \"token_chars\": [\r\n              \"letter\",\r\n              \"digit\"\r\n            ]\r\n          }\r\n        },\r\n        \"analyzer\": {\r\n          \"my_ngram_analyzer\": {\r\n            \"type\": \"custom\",\r\n            \"tokenizer\": \"my_ngram_tokenizer\",\r\n            \"filter\": [\"lowercase\"]\r\n          }\r\n        }\r\n      }\r\n    }\r\n  },\r\n  \"mappings\": {\r\n    \"properties\": {\r\n      \"sub_seq_no\": { \"type\": \"integer\" },\r\n      \"seq_no\": { \"type\": \"integer\" },\r\n      \"sub_title\": {\r\n        \"type\": \"text\"\r\n      },\r\n      \"sub_brand\": {\r\n        \"type\": \"text\"\r\n      },\r\n      \"search_keyword\": {\r\n        \"type\": \"text\",\r\n        \"analyzer\": \"my_ngram_analyzer\"\r\n      },\r\n      \"search_brand\": {\r\n        \"type\": \"text\",\r\n        \"analyzer\": \"my_ngram_analyzer\"\r\n      },\r\n      \"reg_date\": { \"type\": \"date\" },\r\n      \"upd_date\": { \"type\": \"date\" }\r\n    }\r\n  }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/ocr_product_keyword_ngram",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"ocr_product_keyword_ngram"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "데이터 재색인(Reindex)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"source\": {\r\n    \"index\": \"ocr_product_keyword\"\r\n  },\r\n  \"dest\": {\r\n    \"index\": \"ocr_product_keyword_nori\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9200/_reindex",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"_reindex"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ngram_인덱스_테스트",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"analyzer\": \"my_ngram_analyzer\",\r\n  \"text\": \"아이스카페아메리카노T2잔+부드러운생크림카스텔라\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9200/ocr_product_keyword_ngram/_analyze",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"ocr_product_keyword_ngram",
+						"_analyze"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

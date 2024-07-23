@@ -1,4 +1,6 @@
 HELP.md
+elk-search
+elk-search/**
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/

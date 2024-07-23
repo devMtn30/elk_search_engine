@@ -1,21 +1,23 @@
 {
   "settings": {
-    "index": {
-      "analysis": {
-        "tokenizer": {
-          "my_nori_tokenizer": {
-            "type": "nori_tokenizer",
-            "decompound_mode": "mixed",
-            "discard_punctuation": "false"
-          }
-        },
-        "analyzer": {
-          "my_nori_analyzer": {
-            "type": "custom",
-            "tokenizer": "my_nori_tokenizer",
-            "filter": ["lowercase", "stop"],
-            "char_filter": ["html_strip"]
-          }
+    "analysis": {
+      "analyzer": {
+        "nori_discard": {
+          "tokenizer": "nori_t_discard",
+          "filter": "my_shingle"
+        }
+      },
+      "tokenizer": {
+        "nori_t_discard": {
+          "type": "nori_tokenizer",
+          "decompound_mode": "discard"
+        }
+      },
+      "filter": {
+        "my_shingle": {
+          "type": "shingle",
+          "token_separator": "",
+          "max_shingle_size": 3
         }
       }
     }
@@ -26,19 +28,19 @@
       "seq_no": { "type": "integer" },
       "sub_title": {
         "type": "text",
-        "analyzer": "my_nori_analyzer"
+        "analyzer": "nori_discard"
       },
       "sub_brand": {
         "type": "text",
-        "analyzer": "my_nori_analyzer"
+        "analyzer": "nori_discard"
       },
       "search_keyword": {
         "type": "text",
-        "analyzer": "my_nori_analyzer"
+        "analyzer": "nori_discard"
       },
       "search_brand": {
         "type": "text",
-        "analyzer": "my_nori_analyzer"
+        "analyzer": "nori_discard"
       },
       "reg_date": { "type": "date" },
       "upd_date": { "type": "date" }

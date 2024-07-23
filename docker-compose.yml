@@ -63,12 +63,11 @@ services:
       - oradata:/u01/app/oracle/oradata
     networks:
       - elk
-
 volumes:
   elk-search:
-    driver: local
+    name: elk-search
   oradata:
-    driver: local
+    name: oradata
 
 networks:
   elk:
